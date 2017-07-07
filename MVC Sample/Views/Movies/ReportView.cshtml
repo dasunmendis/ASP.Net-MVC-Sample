@@ -1,0 +1,21 @@
+﻿@model List<MVC_Sample.Models.Customer>
+
+@{
+    WebGrid grid = new WebGrid(null, rowsPerPage: 10);
+    grid.Bind(Model, autoSortAndPage: true, rowCount: 10);
+}
+
+@grid.GetHtml(tableStyle: "table table-bordered",
+ mode: WebGridPagerModes.All,
+ firstText: "<< First",
+ previousText: "< Prev",
+ nextText: "Next >",
+ lastText: "Last >>",
+    columns: grid.Columns(
+    grid.Column("Id", " Id"),
+    grid.Column("Name", "Name"),
+    //grid.Column("Price", "Price"),
+    //grid.Column("Department", "Department"),
+    grid.Column(header: "Action",
+                format: @<a data-value="@item.Id" href="java{C}<!-- no -->script:void(0)">Edit</a>)
+))
